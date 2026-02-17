@@ -2,7 +2,6 @@
 // We will revisit this in the next project.
 // Your book objects should have the book’s title, author, the number of pages, and whether or not
 // you have read the book.
-
 function Book(title, author, pages, read) {
   // throw an error
   if (!new.target) {
@@ -13,7 +12,7 @@ function Book(title, author, pages, read) {
   this.pages = pages
   this.read = read
 
-  this.info = function () {
+  Book.prototype.info = function () {
     return `${title} by ${author}, ${pages} pages, ${read === false ? "not read yet!" : "just read!"}`
   }
 }
