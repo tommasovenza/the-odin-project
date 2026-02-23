@@ -1,5 +1,17 @@
-const myLibrary = []
+let myLibrary = []
 const resultsList = document.querySelector("#results > ul")
+
+function deleteBook(e) {
+  if (e.target.classList.contains("btn-delete")) {
+    console.log("delete")
+    // remove from DOM
+    e.target.closest("li").remove()
+    // remove item from array
+    const id = e.target.closest("div").dataset.id
+    // remove item from array
+    myLibrary = myLibrary.filter(item => item.id !== id)
+  }
+}
 
 function createNewBook(e) {
   // prevent Default Form Behaviour
@@ -52,13 +64,14 @@ function printLibrary(arrayBooks) {
   arrayBooks.forEach(book => {
     const li = document.createElement("li")
     li.innerHTML = `
-    <li>
+    <div data-id="${book.id}">
         Title: ${book.title}, 
         Author: ${book.author}, 
         Number of Pages: ${book.pages}
         Read: ${book.read === true ? "Letto! 😎" : "Mai letto 😔"}
         id: ${book.id}
-    </li>
+        <button class="btn-delete">Delete</button>
+    </div>
     `
     resultsList.appendChild(li)
   })
@@ -80,4 +93,6 @@ function init() {
   document
     .querySelector("#create-new-btn")
     .addEventListener("click", e => createNewBook(e))
+
+  resultsList.addEventListener("click", deleteBook)
 }
