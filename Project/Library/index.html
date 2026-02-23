@@ -3,10 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <script src="library.js" defer></script>
     <title>Project Library</title>
   </head>
   <body>
+    <div class="wrapper-controls">
+      <button id="show-form">click me</button>
+
+      <div class="lateral-bar">
+        <form>
+          <!-- Title -->
+          <div class="form-control">
+            <label for="title">title</label>
+            <input type="text" name="title" id="title" />
+          </div>
+          <div class="form-control">
+            <label for="author">author</label>
+            <input type="text" name="author" id="author" />
+          </div>
+          <div class="form-control">
+            <label for="pages">Number of Pages</label>
+            <input type="number" name="pages" id="pages" />
+          </div>
+          <div class="form-control">
+            <label for="read">Book Read?</label>
+            <input type="text" name="read" id="read" />
+          </div>
+
+          <button id="create-new-btn" type="submit">Create new</button>
+        </form>
+      </div>
+    </div>
+
     <div id="results">
       <ul class="list"></ul>
     </div>

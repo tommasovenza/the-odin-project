@@ -1,6 +1,33 @@
 const myLibrary = []
 const resultsList = document.querySelector("#results > ul")
 
+function createNewBook(e) {
+  // prevent Default Form Behaviour
+  e.preventDefault()
+  // getting values
+  const title = document.querySelector("#title").value
+  const author = document.querySelector("#author").value
+  const pages = document.querySelector("#pages").value
+  const read = document.querySelector("#read").value
+  // log
+  console.log(title)
+  console.log(author)
+  console.log(pages)
+  console.log(read)
+
+  addBookToLibrary(title, author, pages, read)
+  printLibrary(myLibrary)
+
+  clean()
+}
+
+function clean() {
+  document.querySelector("#title").value = ""
+  document.querySelector("#author").value = ""
+  document.querySelector("#pages").value = ""
+  document.querySelector("#read").value = ""
+}
+
 function Book(title, author, pages, read) {
   // the constructor...
   this.title = title
@@ -19,6 +46,8 @@ function addBookToLibrary(param1, param2, param3, param4) {
 }
 
 function printLibrary(arrayBooks) {
+  resultsList.innerHTML = ""
+
   // loop
   arrayBooks.forEach(book => {
     const li = document.createElement("li")
@@ -28,6 +57,7 @@ function printLibrary(arrayBooks) {
         Author: ${book.author}, 
         Number of Pages: ${book.pages}
         Read: ${book.read === true ? "Letto! 😎" : "Mai letto 😔"}
+        id: ${book.id}
     </li>
     `
     resultsList.appendChild(li)
@@ -39,3 +69,15 @@ addBookToLibrary("50 Sfumature di Grigio", "Unkwnown", 100, false)
 addBookToLibrary("Grande Fratello", "George Orwell", 257, true)
 
 printLibrary(myLibrary)
+
+init()
+
+function init() {
+  document.querySelector("#show-form").addEventListener("click", () => {
+    document.querySelector(".lateral-bar").classList.add("active")
+  })
+
+  document
+    .querySelector("#create-new-btn")
+    .addEventListener("click", e => createNewBook(e))
+}

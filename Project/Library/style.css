@@ -1,0 +1,14 @@
+.wrapper-controls {
+  display: flex;
+  gap: 2em;
+}
+.lateral-bar {
+  border: 5px solid rgba(0, 0, 0, 0.15);
+  padding: 2em;
+  max-width: 300px;
+  transform: translate(-500px);
+  transition: 0.4s all;
+}
+.lateral-bar.active {
+  transform: translate(0);
+}
