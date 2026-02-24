@@ -11,6 +11,23 @@ function deleteBook(e) {
     // remove item from array
     myLibrary = myLibrary.filter(item => item.id !== id)
   }
+
+  if (e.target.classList.contains("btn-change")) {
+    // get read
+    let read = e.target.closest("div").dataset.read
+    // change status
+    if (read === "true") {
+      read = "false"
+      e.target.closest("div").dataset.read = read
+      e.target.closest("div").querySelector(".to-change").innerHTML =
+        "Mai letto 😔"
+    } else if (read === "false") {
+      read = "true"
+      e.target.closest("div").dataset.read = read
+      e.target.closest("div").querySelector(".to-change").innerHTML =
+        "Letto! 😎"
+    }
+  }
 }
 
 function createNewBook(e) {
@@ -64,26 +81,19 @@ function printLibrary(arrayBooks) {
   arrayBooks.forEach(book => {
     const li = document.createElement("li")
     li.innerHTML = `
-    <div data-id="${book.id}">
-        Title: ${book.title}, 
-        Author: ${book.author}, 
-        Number of Pages: ${book.pages}
-        Read: ${book.read === true ? "Letto! 😎" : "Mai letto 😔"}
-        id: ${book.id}
+    <div data-id="${book.id}" data-read="${book.read}">
+        <span>Title: ${book.title},</span>
+        <span>Author: ${book.author},</span> 
+        <span>Number of Pages: ${book.pages},</span>
+        <span class="to-change">Read: ${book.read === "true" ? "Letto! 😎" : "Mai letto 😔"},</span>
+        <span>id: ${book.id}</span>
         <button class="btn-delete">Delete</button>
+        <button class="btn-change">Change Read Status</button></span>
     </div>
     `
     resultsList.appendChild(li)
   })
 }
-
-addBookToLibrary("Altà Fedeltà", "Nick Horby", 300, true)
-addBookToLibrary("50 Sfumature di Grigio", "Unkwnown", 100, false)
-addBookToLibrary("Grande Fratello", "George Orwell", 257, true)
-
-printLibrary(myLibrary)
-
-init()
 
 function init() {
   document.querySelector("#show-form").addEventListener("click", () => {
@@ -95,4 +105,12 @@ function init() {
     .addEventListener("click", e => createNewBook(e))
 
   resultsList.addEventListener("click", deleteBook)
+
+  addBookToLibrary("Altà Fedeltà", "Nick Horby", 300, "true")
+  addBookToLibrary("50 Sfumature di Grigio", "Unkwnown", 100, "false")
+  addBookToLibrary("Grande Fratello", "George Orwell", 257, "true")
+
+  printLibrary(myLibrary)
 }
+
+init()
