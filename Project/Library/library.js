@@ -1,5 +1,25 @@
 let myLibrary = []
 const resultsList = document.querySelector("#results > ul")
+const allErrorsField = document.querySelectorAll(".error")
+
+function showError(errorType) {
+  // console.log(errorType)
+  if (errorType === "wrong") {
+    document.querySelector(".read .error").innerHTML =
+      `<p style="color: red">write 'true' or 'false'</p>`
+
+    setTimeout(() => {
+      document.querySelector(".read > .error").innerHTML = ""
+    }, 2000)
+  } else {
+    const errorField = document.querySelector(`.${errorType} > .error`)
+    errorField.innerHTML = `<p style="color: red">${errorType} is missing</p>`
+
+    setTimeout(() => {
+      allErrorsField.forEach(error => (error.innerHTML = ""))
+    }, 2000)
+  }
+}
 
 function deleteBook(e) {
   if (e.target.classList.contains("btn-delete")) {
@@ -31,23 +51,36 @@ function deleteBook(e) {
 }
 
 function createNewBook(e) {
+  // clean
+  clean()
   // prevent Default Form Behaviour
   e.preventDefault()
   // getting values
-  const title = document.querySelector("#title").value
-  const author = document.querySelector("#author").value
-  const pages = document.querySelector("#pages").value
-  const read = document.querySelector("#read").value
-  // log
-  console.log(title)
-  console.log(author)
-  console.log(pages)
-  console.log(read)
-
+  const title = document.querySelector("#title").value.trim()
+  const author = document.querySelector("#author").value.trim()
+  const pages = document.querySelector("#pages").value.trim()
+  const read = document.querySelector("#read").value.trim()
+  // validation
+  if (title === "" || title === null) {
+    showError("title")
+    return
+  } else if (author === "" || author === null) {
+    showError("author")
+    return
+  } else if (pages === "" || pages === null) {
+    showError("pages")
+    return
+  } else if (read === "" || read === null) {
+    showError("read")
+    return
+  } else if (read !== "false" && read !== "true") {
+    showError("wrong")
+    return
+  }
+  // Create a new Book
   addBookToLibrary(title, author, pages, read)
+  // Print all library
   printLibrary(myLibrary)
-
-  clean()
 }
 
 function clean() {
@@ -102,7 +135,7 @@ function init() {
 
   document
     .querySelector("#create-new-btn")
-    .addEventListener("click", e => createNewBook(e))
+    .addEventListener("click", createNewBook)
 
   resultsList.addEventListener("click", deleteBook)
 

@@ -9,33 +9,41 @@
   </head>
   <body>
     <div class="wrapper-controls">
+      <!-- Btn To Show form -->
       <button id="show-form">click me</button>
-
+      <!-- Form in a lateral bar -->
       <div class="lateral-bar">
         <form>
           <!-- Title -->
-          <div class="form-control">
+          <div class="form-control title">
             <label for="title">title</label>
             <input type="text" name="title" id="title" />
+            <div class="error"></div>
           </div>
-          <div class="form-control">
+          <!-- Author -->
+          <div class="form-control author">
             <label for="author">author</label>
             <input type="text" name="author" id="author" />
+            <div class="error"></div>
           </div>
-          <div class="form-control">
+          <!-- Number of Pages -->
+          <div class="form-control pages">
             <label for="pages">Number of Pages</label>
             <input type="number" name="pages" id="pages" />
+            <div class="error"></div>
           </div>
-          <div class="form-control">
+          <!-- Read Status -->
+          <div class="form-control read">
             <label for="read">Book Read?</label>
             <input type="text" name="read" id="read" />
+            <div class="error"></div>
           </div>
-
+          <!-- Button Form Submit -->
           <button id="create-new-btn" type="submit">Create new</button>
         </form>
       </div>
     </div>
-
+    <!-- Results -->
     <div id="results">
       <ul class="list"></ul>
     </div>
